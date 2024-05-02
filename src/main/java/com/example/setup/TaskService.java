@@ -10,15 +10,18 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<Task> getAllTasks(){
-        return taskRepository.findAll();
+    public List<TaskDTO> getAllTasks(){
+        var res = taskRepository.findAll();
+        return Utils.convertToTaskDTO(res);
     }
 
-    public List<Task> getByTitle(String title){
-        return taskRepository.findByTitle(title);
+    public List<TaskDTO> getByTitle(String title){
+        var res= taskRepository.findByTitleContaining(title);
+        return Utils.convertToTaskDTO(res);
     }
 
-    public List<Task> getByStatus(Boolean status){
-        return taskRepository.findByStatus(status);
+    public List<TaskDTO> getByStatus(Boolean status){
+        var res = taskRepository.findByStatus(status);
+        return Utils.convertToTaskDTO(res);
     }
 }

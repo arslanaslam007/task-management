@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -15,17 +14,17 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public List<Task> getAllTasks(){
+    public List<TaskDTO> getAllTasks(){
         return taskService.getAllTasks();
     }
 
     @GetMapping("/title")
-    public List<Task> findByTitle(@RequestParam String title){
+    public List<TaskDTO> findByTitle(@RequestParam String title){
         return taskService.getByTitle(title);
     }
 
     @GetMapping("/status")
-    public List<Task> getByStatus(@RequestParam Boolean status){
+    public List<TaskDTO> getByStatus(@RequestParam Boolean status){
         return taskService.getByStatus(status);
     }
 }
