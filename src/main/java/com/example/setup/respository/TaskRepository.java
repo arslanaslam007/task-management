@@ -1,5 +1,6 @@
-package com.example.setup;
+package com.example.setup.respository;
 
+import com.example.setup.object.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

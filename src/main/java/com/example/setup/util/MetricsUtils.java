@@ -1,5 +1,6 @@
-package com.example.setup;
+package com.example.setup.util;
 
+import com.example.setup.object.ResponseMetrics;
 import org.springframework.http.HttpStatus;
 
 public class MetricsUtils {

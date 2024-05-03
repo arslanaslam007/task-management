@@ -1,4 +1,4 @@
-package com.example.setup;
+package com.example.setup.object;
 
 import jakarta.persistence.*;
 import lombok.Getter;

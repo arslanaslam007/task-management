@@ -1,4 +1,7 @@
-package com.example.setup;
+package com.example.setup.util;
+
+import com.example.setup.object.Task;
+import com.example.setup.object.TaskDTO;
 
 import java.util.ArrayList;
 import java.util.List;

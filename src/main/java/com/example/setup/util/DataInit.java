@@ -1,6 +1,8 @@
-package com.example.setup;
+package com.example.setup.util;
 
 
+import com.example.setup.object.Task;
+import com.example.setup.respository.TaskRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
