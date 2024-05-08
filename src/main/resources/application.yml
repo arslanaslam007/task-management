@@ -10,7 +10,3 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-  security:
-    user:
-      name: user
-      password: 123
