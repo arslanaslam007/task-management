@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/api/user/task")
 public class TaskController {
     @Autowired
     private TaskService taskService;
