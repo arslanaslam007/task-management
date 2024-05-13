@@ -17,8 +17,11 @@ public class Task {
     private String title;
     private Boolean status;
 
-    public Task(String title, Boolean status) {
+    private Long userId;
+
+    public Task(String title, Boolean status,Long userId) {
         this.title = title;
         this.status = status;
+        this.userId = userId;
     }
 }

@@ -10,7 +10,7 @@ public class Utils {
     public static TaskDTO convertToTaskDTO(Task task){
         if (task == null)
             return null;
-        return new TaskDTO(task.getId(),task.getTitle(),task.getStatus());
+        return new TaskDTO(task.getId(),task.getTitle(),task.getStatus(), task.getUserId());
     }
     public static List<TaskDTO> convertToTaskDTO(List<Task> task){
         List<TaskDTO> tasks = new ArrayList<>();
@@ -20,6 +20,6 @@ public class Utils {
     public static Task convertToTaskEntity(TaskDTO dto){
         if (dto == null)
             return null;
-        return new Task(dto.getTitle(),dto.getStatus());
+        return new Task(dto.getTitle(),dto.getStatus(),dto.getUserId());
     }
 }

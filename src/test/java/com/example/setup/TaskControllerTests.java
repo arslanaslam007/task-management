@@ -83,7 +83,7 @@ public class TaskControllerTests {
 
     @Test
     public void createTaskPositiveFlow() throws Exception {
-        var task = new TaskDTO(null,"Test",false);
+        var task = new TaskDTO(null,"Test",false,null);
         var res = objectMapper.writeValueAsString(task);
 
         Mockito.when(taskService.persistTask(Mockito.any())).thenReturn(task);
@@ -96,7 +96,7 @@ public class TaskControllerTests {
 
     @Test
     public void updateTaskPositiveFlow() throws Exception {
-        var task = new TaskDTO(1L,"Test",false);
+        var task = new TaskDTO(1L,"Test",false,null);
         var res = objectMapper.writeValueAsString(task);
 
         Mockito.when(taskService.persistTask(Mockito.any())).thenReturn(task);

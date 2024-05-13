@@ -7,11 +7,11 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
-public class TaskDTO {
+@Setter
+public class UserDetailDTO {
     private Long id;
-    private String title;
-    private Boolean status;
-    private Long userId;
+    private String username;
+    private String password;
+    private String role;
 }

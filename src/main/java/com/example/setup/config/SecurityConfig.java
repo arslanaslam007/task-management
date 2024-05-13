@@ -26,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(reg -> {
             reg.requestMatchers("/").permitAll();
+            reg.requestMatchers("/api/auth/**").permitAll();
             reg.requestMatchers("/api/user/**").hasRole(USER_ROLE);
             reg.requestMatchers("/api/admin/**").hasRole(ADMIN_ROLE);
             reg.anyRequest().authenticated();
