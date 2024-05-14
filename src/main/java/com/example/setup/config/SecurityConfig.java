@@ -1,6 +1,5 @@
 package com.example.setup.config;
 
-import com.example.setup.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
