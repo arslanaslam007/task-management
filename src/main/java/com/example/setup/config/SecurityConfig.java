@@ -8,7 +8,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,16 +25,12 @@ public class SecurityConfig {
         http.authorizeHttpRequests(reg -> {
             reg.requestMatchers("/").permitAll();
             reg.requestMatchers("/api/auth/**").permitAll();
-            reg.requestMatchers("/api/user/**").hasRole(USER_ROLE);
+            reg.requestMatchers("/api/user/**").hasAnyRole(USER_ROLE,ADMIN_ROLE);
             reg.requestMatchers("/api/admin/**").hasRole(ADMIN_ROLE);
             reg.anyRequest().authenticated();
         });
         http.httpBasic(withDefaults()).csrf(AbstractHttpConfigurer::disable);
         return http.build();
-    }
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return myUserDetailService;
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){

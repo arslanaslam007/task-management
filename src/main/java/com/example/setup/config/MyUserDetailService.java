@@ -21,21 +21,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userDetailRepository.getByUsername(username);
-        if(user.isPresent()){
-            return User.builder()
-                    .username(user.get().getUsername())
-                    .password(user.get().getPassword())
-                    .roles(getRole(user.get().getRole()))
-                    .build();
-        }else{
-            throw new UsernameNotFoundException("User not Found");
-        }
-    }
-    public String[] getRole(String role){
-        if(Objects.equals(role,ADMIN_ROLE)){
-            return new String[]{ADMIN_ROLE,USER_ROLE};
-        }
-        return new String[]{USER_ROLE};
+        return userDetailRepository.getByUsername(username)
+                .orElseThrow( () -> new UsernameNotFoundException("User not Found"));
     }
 }
