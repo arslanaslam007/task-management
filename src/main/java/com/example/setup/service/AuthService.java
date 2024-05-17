@@ -38,7 +38,14 @@ public class AuthService {
         userDetailRepository.save(entity);
 
         var token = jwtService.generateToken(entity);
-        return new AuthenticationResponse(token);
+
+        var response = new AuthenticationResponse();
+        response.setToken(token);
+        response.setId(entity.getId());
+        response.setUsername(entity.getUsername());
+        response.setPassword(entity.getPassword());
+        response.setRole(entity.getRole());
+        return response;
     }
 
     public AuthenticationResponse login(UserDetailDTO userDetailDTO) throws Exception{
@@ -52,7 +59,14 @@ public class AuthService {
 
         if(entity.isPresent()){
             var token = jwtService.generateToken(entity.get());
-            return new AuthenticationResponse(token);
+            var entity1 = entity.get();
+            var response = new AuthenticationResponse();
+            response.setToken(token);
+            response.setId(entity1.getId());
+            response.setUsername(entity1.getUsername());
+            response.setPassword(entity1.getPassword());
+            response.setRole(entity1.getRole());
+            return response;
         }
         return null;
     }
