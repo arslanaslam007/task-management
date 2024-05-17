@@ -2,9 +2,10 @@ package com.example.setup.service;
 
 import com.example.setup.object.Task;
 import com.example.setup.object.TaskDTO;
+import com.example.setup.object.UserTaskDTO;
 import com.example.setup.respository.TaskRepository;
 import com.example.setup.util.Utils;
-import org.hibernate.service.spi.InjectService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,13 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<TaskDTO> getAllTasks(){
-        var res = taskRepository.findAll();
+    public List<TaskDTO> getTasks(Long userId){
+        var res = taskRepository.findByUserId(userId);
+        return Utils.convertToTaskDTO(res);
+    }
+
+    public TaskDTO getTask(UserTaskDTO user){
+        var res = taskRepository.findByIdAndUserId(user.getTaskId(),user.getUserId());
         return Utils.convertToTaskDTO(res);
     }
 
@@ -30,23 +36,6 @@ public class TaskService {
         return Utils.convertToTaskDTO(res);
     }
 
-    public TaskDTO persistTask(TaskDTO dto){
-        var entity = findById(dto.getId());
-
-        if(entity == null)
-            entity = createTask(dto);
-        else
-            entity = updateTask(entity,dto);
-
-        return Utils.convertToTaskDTO(entity);
-    }
-    public Task findById(Long id){
-        if(id == null)
-            return null;
-
-        return taskRepository.findById(id).orElse(null);
-    }
-
     public Task createTask(TaskDTO dto){
         var entity = Utils.convertToTaskEntity(dto);
         return taskRepository.save(entity);
@@ -58,17 +47,24 @@ public class TaskService {
         return taskRepository.save(entity);
     }
 
-    public String deleteTask(Long id){
-        var res = findById(id);
+    @Transactional
+    public String deleteTask(UserTaskDTO user){
+        var res = taskRepository.findByIdAndUserId(user.getTaskId(),user.getUserId());
         if (res == null)
             return "Object Not Found";
         else
-            taskRepository.deleteById(id);
+            taskRepository.deleteByIdAndUserId(user.getTaskId(),user.getUserId());
         return "Object Deleted";
     }
+    public TaskDTO persistTask(TaskDTO dto){
+        var entity = taskRepository.findByIdAndUserId(dto.getId(),dto.getUserId());
 
-    public TaskDTO getTask(Long id){
-        var res = findById(id);
-        return Utils.convertToTaskDTO(res);
+        if(entity == null)
+            entity = createTask(dto);
+        else
+            entity = updateTask(entity,dto);
+
+        return Utils.convertToTaskDTO(entity);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.setup.controller;
 
+import com.example.setup.object.UserTaskDTO;
 import com.example.setup.util.MetricsUtils;
 import com.example.setup.object.ResponseMetrics;
 import com.example.setup.object.TaskDTO;
@@ -13,15 +14,15 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping
-    public ResponseMetrics getAllTasks(){
-        var res = taskService.getAllTasks();
+    @GetMapping("/{id}")
+    public ResponseMetrics getTasks(@PathVariable Long id){
+        var res = taskService.getTasks(id);
         return MetricsUtils.convertToOkResponse(res);
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseMetrics getTask(@PathVariable Long id){
-        var res = taskService.getTask(id);
+    @GetMapping("/taskId")
+    public ResponseMetrics getTask(@ModelAttribute UserTaskDTO user){
+        var res = taskService.getTask(user);
         return MetricsUtils.convertToOkResponse(res);
     }
     @GetMapping("/title")
@@ -47,9 +48,9 @@ public class TaskController {
         var res = taskService.persistTask(task);
         return MetricsUtils.convertToOkResponse(res);
     }
-    @DeleteMapping("/id/{id}")
-    public ResponseMetrics deleteTask(@PathVariable Long id){
-        var res = taskService.deleteTask(id);
+    @DeleteMapping
+    public ResponseMetrics deleteTask(@ModelAttribute UserTaskDTO user){
+        var res = taskService.deleteTask(user);
         return MetricsUtils.convertToOkResponse(res);
     }
 }
