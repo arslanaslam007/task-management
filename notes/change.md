@@ -6,7 +6,6 @@
 
 update model
 - AuthenticationResponse , extend with UserDetailDTO
-- add builder annotation for it
 
 change auth service
 - set fields of UserDetailDTO in response for signup
